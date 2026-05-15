@@ -1,24 +1,24 @@
 [
-    {
-        "id": 1,
-        "topic": "React Basics",
-        "description": "Introduction to React components and props.",
-        "type": "link",
-        "link": "https://www.youtube.com/",
-        "files": []
-    },
-    {
-        "id": 2,
-        "topic": "Node.js Introduction",
-        "description": "Learn about Node.js and Express framework",
-        "type": "both",
-        "link": "https://www.youtube.com/",
-        "files": [
-            {
-                "originalName": "New Microsoft Word Document (2).docx",
-                "fileName": "New Microsoft Word Document (2).docx",
-                "path": "uploads\\New Microsoft Word Document (2).docx"
-            }
-        ]
-    }
+  {
+    "id": 1,
+    "topic": "React Basics",
+    "description": "Introduction to React components and props.",
+    "type": "link",
+    "link": "https://www.youtube.com/",
+    "files": []
+  },
+  {
+    "id": 2,
+    "topic": "Node.js Introduction",
+    "description": "Learn about Node.js and Express framework",
+    "type": "file",
+    "link": null,
+    "files": [
+      {
+        "originalName": "New Microsoft Word Document (2).docx",
+        "fileName": "New Microsoft Word Document (2).docx",
+        "path": "uploads\\New Microsoft Word Document (2).docx"
+      }
+    ]
+  }
 ]

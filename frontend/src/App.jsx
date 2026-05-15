@@ -238,27 +238,30 @@ function App() {
             {getData.map((item) => (
               <div key={item.id} className="border border-gray-300 rounded-md p-3 ms-4 me-4 h-auto mb-8">
                 <div>
-                  <div className="flex items-center">
-                    <FiChevronDown
-                      onClick={() => {
-                        if (closeCard.includes(item.id)) {
-                          setCloseCard(closeCard.filter((id) => id !== item.id));
-                        } else {
-                          setCloseCard([...closeCard, item.id]);
-                        }
-                      }}
-                      className={`me-2 mb-2 dark:text-white cursor-pointer hover:scale-150 transition-transform ${closeCard.includes(item.id) ? "rotate-180" : ""}`}
-                    />
+                  <div className="flex items-center justify-between">
 
-                    {editId === item.id ? (
-                      <input
-                        type="text" value={editData.topic}
-                        onChange={(e) => setEditData({ ...editData, topic: e.target.value })}
-                        className="px-4 py-2 rounded-md cursor-pointer mb-3 bg-white w-5/12 focus:outline-none focus:ring-2 border border-[#9fd2cd] focus:ring-[#9fd2cd] me-5"
+                    <div className="flex items-center">
+                      <FiChevronDown
+                        onClick={() => {
+                          if (closeCard.includes(item.id)) {
+                            setCloseCard(closeCard.filter((id) => id !== item.id));
+                          } else {
+                            setCloseCard([...closeCard, item.id]);
+                          }
+                        }}
+                        className={`me-2 mb-2 dark:text-white cursor-pointer hover:scale-150 transition-transform ${closeCard.includes(item.id) ? "rotate-180" : ""}`}
                       />
-                    ) : (
-                      <h3 className="text-lg dark:text-white  font-semibold me-2 mb-3">{item.topic}</h3>
-                    )}
+
+                      {editId === item.id ? (
+                        <input
+                          type="text" value={editData.topic}
+                          onChange={(e) => setEditData({ ...editData, topic: e.target.value })}
+                          className="px-4 py-2 rounded-md cursor-pointer mb-3 bg-white w-5/12 focus:outline-none focus:ring-2 border border-[#9fd2cd] focus:ring-[#9fd2cd] me-5"
+                        />
+                      ) : (
+                        <h3 className="text-lg dark:text-white  font-semibold me-2 mb-3">{item.topic}</h3>
+                      )}
+                    </div>
 
 
                     {/* edit btn */}
@@ -277,8 +280,8 @@ function App() {
                         }}
                       />
                     )}
-
                   </div>
+
 
                   {!closeCard.includes(item.id) && (
                     <>
