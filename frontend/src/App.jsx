@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Materiel from "../components/Materiel.jsx";
+import DarkModeToggle from "../components/DarkModeToggle.jsx";
 
 
 function App() {
@@ -128,26 +129,30 @@ function App() {
     const ext = fileName?.split(".").pop().toLowerCase();
     switch (ext) {
       case "pdf":
-        return (<div className="border border-[#9FD2CD] bg-[#9fd2cd] rounded-full p-2 flex items-center justify-center">
-          <FaFilePdf size={18} color={"#ffffff"} className="mt-1 shrink-0" />;
+        return (<div className="border border-[#9FD2CD] bg-[#9fd2cd] dark:border-[#3bb9af]  dark:bg-[#457a76] rounded-full p-2 flex items-center gap-2 justify-center">
+          <FaFilePdf size={18} color={"#ffffff"} className="mt-1 shrink-0"></FaFilePdf>
+          {fileName}
         </div>)
       case "doc":
       case "docx":
-        return (<div className="border border-[#9FD2CD] bg-[#9fd2cd] rounded-full p-2 flex items-center justify-center">
-          <FaFileWord size={18} color={"#ffffff"} className="mt-1 shrink-0" />;
+        return (<div className="border border-[#9FD2CD] bg-[#9fd2cd] dark:border-[#3bb9af]  dark:bg-[#333c3b]  text-gray-400 hover:text-[#457a76] rounded-full p-2 gap-2 flex items-center justify-center">
+          <FaFileWord size={18} color={"#ffffff"} className="mt-1 shrink-0" ></FaFileWord>
+          {fileName}
         </div>)
       case "ppt":
       case "pptx":
-        return (<div className="border border-[#9FD2CD] bg-[#9fd2cd] rounded-full p-2 flex items-center justify-center">
-          <FaFilePowerpoint size={18} color={"#ffffff"} className="mt-1 shrink-0" />;</div>)
+        return (<div className="border border-[#9FD2CD] bg-[#9fd2cd] dark:border-[#3bb9af]  dark:bg-[#457a76] text-gray-400 rounded-full p-2 flex items-center justify-center gap-2">
+          <FaFilePowerpoint size={18} color={"#ffffff"} className="mt-1 shrink-0"></FaFilePowerpoint>{fileName}</div>)
       case "mp4":
       case "webm":
       case "mov":
-        return (<div className="border border-[#9FD2CD] bg-[#9fd2cd] rounded-full p-2 flex items-center justify-center">
-          <FaFileVideo size={18} color={"#ffffff"} className="mt-1 shrink-0" />;
+        return (<div className="border border-[#9FD2CD] bg-[#9fd2cd] dark:border-[#3bb9af]  dark:bg-[#457a76] rounded-full p-2 gap-2 flex items-center justify-center">
+          <FaFileVideo size={18} color={"#ffffff"} className="mt-1 shrink-0"></FaFileVideo>
+          {fileName}
         </div>)
       default:
-        return <FaFileAlt size={18} color={"#9FD2CD"} className="mt-1 shrink-0" />;
+        return <FaFileAlt size={18} color={"#9FD2CD"} className="mt-1 shrink-0"></FaFileAlt>
+        { fileName }
     }
   };
 
@@ -166,20 +171,30 @@ function App() {
   return (
     <>
       <ToastContainer />
-      <div className="min-h-screen px-4 py-6 bg-gradient-to-r flex justify-center from-[#eafaf2] to-[#f1fae1]">
-        <div className="bg-white w-full max-w-4xl rounded-lg shadow-md p-4 sm:p-6">
+      <div className="min-h-screen px-4 py-6 bg-gradient-to-r flex justify-center from-[#eafaf2] to-[#f1fae1] dark:from-[#0f1117] dark:to-[#0f1117]">
+        <div className="bg-white dark:bg-[#1a1d27] border dark:border-white/7 w-full max-w-4xl rounded-lg shadow-md p-4 sm:p-6">
+          <div className="flex justify-end mb-4">
+            <DarkModeToggle />
+          </div>
           {auth?.isAdmin && (
             <>
               <div className="flex gap-2 justify-center">
                 <button
-                  className="bg-[#3bb961] gap-2 text-white px-4 py-2 rounded-md cursor-pointer mt-7 me-2 w-26 flex justify-center items-center"
-                  onClick={() => { setShowUpdateIcon(true); setMode("admin"); }}
+                  className="bg-[#3bb961] dark:bg-[#1a1d27] gap-2 text-white dark:text-white border dark:border-white/10 hover:scale-110 px-4 py-2 rounded-md cursor-pointer mt-7 me-2 w-26 flex justify-center items-center"
+                  onClick={() => {
+                    setShowUpdateIcon(true);
+                    setMode("admin");
+                  }}
                 >
                   <FiEdit /> Update
                 </button>
                 <button
-                  className="bg-[#acb93b] gap-2 text-white px-4 py-2 rounded-md cursor-pointer mt-7 w-26 flex justify-center items-center"
-                  onClick={() => setMode("view")}
+                  className="bg-[#acb93b] dark:bg-[#1a1d27] gap-2 text-white dark:text-white border dark:border-white/10 hover:scale-110 px-4 py-2 rounded-md cursor-pointer mt-7 w-26 flex justify-center items-center"
+                  onClick={() => {
+                    setMode("view");
+                    setIsShowInputs(false);
+                    setEditid(null);
+                  }}
                 >
                   <FiEye /> View
                 </button>
@@ -188,7 +203,7 @@ function App() {
               {mode === "admin" && (
                 <button
                   onClick={() => setIsShowInputs(!showInputs)}
-                  className="bg-[#3bb9af] ms-4 flex justify-center items-center text-white px-4 py-2 rounded-md cursor-pointer mt-7"
+                  className="bg-[#3bb9af]  dark:bg-[#1a1d27] text-white dark:text-white border dark:border-white/10 hover:scale-110 ms-4 flex justify-center items-center text-white px-4 py-2 rounded-md cursor-pointer mt-7"
                 >
                   <FiPlus />
                 </button>
@@ -197,14 +212,14 @@ function App() {
           )}
 
           {showInputs && mode === "admin" && (
-            <div className="mt-10 space-y-4" onClick={(e) => e.stopPropagation()}>
+            <div className="mt-10 space-y-4 border border-[#9fd2cd] rounded-md p-3" onClick={(e) => e.stopPropagation()}>
               <input
-                className="px-4 py-2 rounded-md cursor-pointer mb-5 bg-white lg:w-5/12 sm:w-full w-full focus:outline-none focus:ring-2 border border-[#9fd2cd] focus:ring-[#9fd2cd]"
+                className="px-4 py-2 rounded-md cursor-pointer mb-5 bg-white dark:bg-[#13151e] text-black dark:text-white  lg:w-5/12 sm:w-full w-full focus:outline-none focus:ring-2 border border-[#9fd2cd] focus:ring-[#9fd2cd]"
                 type="text" placeholder="Topic" name="topic"
                 value={data.topic} onChange={handleChange}
               /><br />
               <input
-                className="px-4 py-2 rounded-md cursor-pointer mb-5 bg-white lg:w-5/12 sm:w-full w-full focus:outline-none focus:ring-2 border border-[#9fd2cd] focus:ring-[#9fd2cd]"
+                className="px-4 py-2 rounded-md cursor-pointer mb-5 bg-white dark:bg-[#13151e] text-black dark:text-white lg:w-5/12 sm:w-full w-full focus:outline-none focus:ring-2 border border-[#9fd2cd] focus:ring-[#9fd2cd]"
                 type="text" placeholder="Description" name="description"
                 value={data.description} onChange={handleChange}
               /><br />
@@ -232,7 +247,7 @@ function App() {
                           setCloseCard([...closeCard, item.id]);
                         }
                       }}
-                      className={`me-2 mb-2 cursor-pointer hover:scale-150 transition-transform ${closeCard.includes(item.id) ? "rotate-180" : ""}`}
+                      className={`me-2 mb-2 dark:text-white cursor-pointer hover:scale-150 transition-transform ${closeCard.includes(item.id) ? "rotate-180" : ""}`}
                     />
 
                     {editId === item.id ? (
@@ -242,14 +257,14 @@ function App() {
                         className="px-4 py-2 rounded-md cursor-pointer mb-3 bg-white w-5/12 focus:outline-none focus:ring-2 border border-[#9fd2cd] focus:ring-[#9fd2cd] me-5"
                       />
                     ) : (
-                      <h3 className="text-lg font-semibold me-2 mb-3">{item.topic}</h3>
+                      <h3 className="text-lg dark:text-white  font-semibold me-2 mb-3">{item.topic}</h3>
                     )}
 
 
                     {/* edit btn */}
                     {mode === "admin" && (
                       <FiEdit
-                        className="cursor-pointer"
+                        className="cursor-pointer dark:text-white  hover:scale-110 transition-transform"
                         onClick={() => {
                           setEditid(item.id);
                           setEditData({
@@ -269,7 +284,7 @@ function App() {
                     <>
                       <div className="border-b-gray-300 w-180px h-auto border-b flex items-center mt-4">
                         <div className="flex items-start">
-                          <div className="border border-[#9FD2CD] bg-[#9fd2cd] rounded-full p-2 flex items-center justify-center ms-2 mb-2">
+                          <div className="border border-[#9FD2CD] bg-[#9fd2cd] dark:border-[#3bb9af]  dark:bg-[#457a76] rounded-full p-2 flex items-center justify-center ms-2 mb-2">
                             <MdStickyNote2 size={18} color={"#ffffff"} />
                           </div>
                           {editId === item.id ? (
@@ -279,7 +294,7 @@ function App() {
                               className="px-4 py-2 rounded-md cursor-pointer mb-5 bg-white w-5/12 focus:outline-none focus:ring-2 border border-[#9fd2cd] focus:ring-[#9fd2cd]"
                             />
                           ) : (
-                            <h2 className="text-sm ms-5 text-gray-600 me-2 mb-5">{item.description}</h2>
+                            <h2 className="text-sm ms-5 text-gray-600 font-semibold dark:text-gray-300 me-1 mb-5">{item.description}</h2>
                           )}
                         </div>
                       </div>
@@ -337,15 +352,15 @@ function App() {
                           )
                         ) : (
                           // view mode
-                          <div className="text-sm ms-2 text-gray-600 me-2">
+                          <div className="flex gap-3 text-sm ms-2 text-gray-600 me-2">
                             {/* Link */}
                             {(item.type === "link" || item.type === "both") && item.link && (
-                              <a href={item.link} target="_blank" rel="noreferrer" className="text-blue-400 underline">
+                              <a href={item.link} target="_blank" rel="noreferrer" className="text-blue-400 dark:text-white">
                                 <div className="flex items-center gap-3 mb-1">
-                                  <div className="border border-[#9FD2CD] bg-[#9fd2cd] rounded-full p-2 flex items-center justify-center">
+                                  <div className="border border-[#9FD2CD] bg-[#9fd2cd]  dark:border-[#3bb9af]  dark:bg-[#457a76] rounded-full p-2 flex items-center justify-center gap-2">
                                     <FiLink size={18} color={"#ffffff"} className="mt-1 shrink-0" />
+                                    Open Link
                                   </div>
-                                  Open Link
                                 </div>
                               </a>
                             )}
@@ -358,10 +373,10 @@ function App() {
                                     key={index}
                                     href={`http://localhost:8000/uploads/${file.fileName}`}
                                     download
-                                    className="text-blue-400 underline flex items-center gap-2"
+                                    className="text-blue-400 dark:text-white flex items-center gap-2"
                                   >
                                     {getFileIcon(file.fileName)}
-                                    {file.originalName}
+
                                   </a>
                                 ))}
                               </div>

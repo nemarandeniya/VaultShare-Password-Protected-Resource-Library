@@ -63,16 +63,16 @@ const Material = ({ onChange }) => {
 
     return (
         <div>
-            <label className="ms-3">Add Material</label>
+            <label className="ms-3 text-gray-800 dark:text-gray-100">Add Material</label>
 
             {/* Tabs */}
             <div className="flex gap-3 mt-2 lg:w-5/12 sm:w-full">
                 <button
                     type="button"
                     onClick={() => setActiveTab("link")}
-                    className={`flex items-center gap-2 p-[10px] rounded-[8px] ${activeTab === "link" ? "bg-[#9fd2cd]" : "bg-[#e3dfdf]"}`}
+                    className={`flex items-center gap-2 p-[10px] rounded-[8px] ${activeTab === "link" ? "bg-[#9fd2cd] dark:bg-[#3bb9af]" : "bg-[#e3dfdf]"}`}
                 >
-                    <FiLink size={20} className={`${activeTab === "link" ? "text-gray-900" : "text-[#9FD2CD]"}`} /> Link
+                    <FiLink size={20} className={`${activeTab === "link" ? "text-gray-900 dark:text-[#212524]" : "text-[#9FD2CD] dark:text-white"}`} /> Link
                 </button>
                 <button
                     type="button"
@@ -98,7 +98,7 @@ const Material = ({ onChange }) => {
                         placeholder="https://example.com/link"
                         value={link}
                         onChange={(e) => setLink(e.target.value)}
-                        className="px-4 py-2 rounded-md bg-white w-full border border-[#9fd2cd]"
+                        className="px-4 py-2 rounded-md bg-white dark:bg-[#13151e] text-black dark:text-white w-full border border-[#9fd2cd]"
                     />
                 </div>
             )}
