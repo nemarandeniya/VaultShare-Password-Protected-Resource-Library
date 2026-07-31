@@ -6,9 +6,9 @@ const DarkModeToggle = () => {
     return (
         <button
             onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 datk:text-gray-100"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
         >
-            {isDarkMode ? "🌞 Light" : "🌛Dark"}
+            {isDarkMode ? "🌞 Light" : "🌙 Dark"}
         </button>
     );
 };

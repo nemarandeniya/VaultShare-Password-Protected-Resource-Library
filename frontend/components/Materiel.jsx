@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaFilePdf } from "react-icons/fa";
-import { FiLink, FiFile, FiPaperclip } from "react-icons/fi";
+import { FiLink, FiFile, FiPaperclip, FiX } from "react-icons/fi";
 const Material = ({ onChange }) => {
 
     const [activeTab, setActiveTab] = useState("link");
@@ -63,49 +63,60 @@ const Material = ({ onChange }) => {
 
     return (
         <div>
-            <label className="ms-3 text-gray-800 dark:text-gray-100">Add Material</label>
+            <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-2">
+                Add material
+            </label>
 
             {/* Tabs */}
-            <div className="flex gap-3 mt-2 lg:w-5/12 sm:w-full">
+            <div className="inline-flex gap-1 p-1 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800/60">
                 <button
                     type="button"
                     onClick={() => setActiveTab("link")}
-                    className={`flex items-center gap-2 p-[10px] rounded-[8px] ${activeTab === "link" ? "bg-[#9fd2cd] dark:bg-[#3bb9af]" : "bg-[#e3dfdf]"}`}
+                    className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer ${activeTab === "link"
+                            ? "bg-green-600 text-white shadow-sm"
+                            : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                        }`}
                 >
-                    <FiLink size={20} className={`${activeTab === "link" ? "text-gray-900 dark:text-[#212524]" : "text-[#9FD2CD] dark:text-white"}`} /> Link
+                    <FiLink size={14} /> Link
                 </button>
                 <button
                     type="button"
                     onClick={() => setActiveTab("file")}
-                    className={`flex items-center gap-2 p-[10px] rounded-[8px] ${activeTab === "file" ? "bg-[#9fd2cd]" : "bg-[#e3dfdf]"}`}
+                    className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer ${activeTab === "file"
+                            ? "bg-green-600 text-white shadow-sm"
+                            : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                        }`}
                 >
-                    <FiFile size={20} className={`${activeTab === "file" ? "text-gray-900" : "text-[#9FD2CD]"}`} /> File
+                    <FiFile size={14} /> File
                 </button>
                 <button
                     type="button"
                     onClick={() => setActiveTab("both")}
-                    className={`flex items-center gap-2 p-[10px] rounded-[8px] ${activeTab === "both" ? "bg-[#9fd2cd]" : "bg-[#e3dfdf]"}`}
+                    className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer ${activeTab === "both"
+                            ? "bg-green-600 text-white shadow-sm"
+                            : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                        }`}
                 >
-                    <FiPaperclip size={20} className={`${activeTab === "both" ? "text-gray-900" : "text-[#9FD2CD]"}`} /> Both
+                    <FiPaperclip size={14} /> Both
                 </button>
             </div>
 
             {/* LINK */}
             {(activeTab === "link" || activeTab === "both") && (
-                <div className="mt-4 lg:w-5/12 sm:w-full">
+                <div className="mt-4">
                     <input
                         type="url"
                         placeholder="https://example.com/link"
                         value={link}
                         onChange={(e) => setLink(e.target.value)}
-                        className="px-4 py-2 rounded-md bg-white dark:bg-[#13151e] text-black dark:text-white w-full border border-[#9fd2cd]"
+                        className="w-full px-4 py-2.5 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-shadow"
                     />
                 </div>
             )}
 
             {/* FILE */}
             {(activeTab === "file" || activeTab === "both") && (
-                <div className="lg:w-5/12 mt-4">
+                <div className="mt-4">
 
                     {/* Drop area */}
                     <label
@@ -113,9 +124,9 @@ const Material = ({ onChange }) => {
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragLeave}
                         onDrop={handleDrop}
-                        className="border-2 border-dashed border-[#9fd2cd] rounded-xl p-10 text-center cursor-pointer block hover:border-[#3bb9af] hover:bg-[#f0fdfa] transition text-[#9fd2cd] text-sm"
+                        className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-10 text-center cursor-pointer block hover:border-green-500 hover:bg-green-50 dark:hover:bg-green-950/20 transition-colors text-slate-500 dark:text-slate-400 text-sm"
                     >
-                        Drop files here or <span className="text-gray-700 underline ms-1">browse</span>
+                        Drop files here or <span className="text-green-600 dark:text-green-400 font-medium underline ms-1">browse</span>
                     </label>
 
                     <input
@@ -133,7 +144,7 @@ const Material = ({ onChange }) => {
                         const isVideo = file.type?.startsWith("video") || /\.(mp4|webm|mov)$/i.test(file.name);
 
                         return (
-                            <div key={index} className="mt-3 p-3 bg-gray-50 rounded-xl">
+                            <div key={index} className="mt-3 p-3 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 rounded-xl">
                                 {isVideo ? (
                                     <div className="space-y-2">
                                         {previewUrls[index] && (
@@ -144,17 +155,29 @@ const Material = ({ onChange }) => {
                                             />
                                         )}
                                         <div className="flex justify-between items-center">
-                                            <span className="truncate flex-1">{file.name}</span>
-                                            <span className="mx-3">{(file.size / 1024 / 1024).toFixed(1)} MB</span>
-                                            <button type="button" onClick={() => removeFile(index)} className="text-gray-500">✕</button>
+                                            <span className="truncate flex-1 text-sm text-slate-700 dark:text-slate-200">{file.name}</span>
+                                            <span className="mx-3 text-xs text-slate-500 dark:text-slate-400">{(file.size / 1024 / 1024).toFixed(1)} MB</span>
+                                            <button
+                                                type="button"
+                                                onClick={() => removeFile(index)}
+                                                className="text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
+                                            >
+                                                <FiX size={16} />
+                                            </button>
                                         </div>
                                     </div>
                                 ) : (
                                     <div className="flex items-center gap-3">
-                                        <FaFilePdf className="text-xl" />
-                                        <span className="truncate flex-1">{file.name}</span>
-                                        <span>{(file.size / 1024).toFixed(1)} KB</span>
-                                        <button type="button" onClick={() => removeFile(index)} className="text-gray-500">✕</button>
+                                        <FaFilePdf className="text-xl text-green-600 dark:text-green-400 shrink-0" />
+                                        <span className="truncate flex-1 text-sm text-slate-700 dark:text-slate-200">{file.name}</span>
+                                        <span className="text-xs text-slate-500 dark:text-slate-400">{(file.size / 1024).toFixed(1)} KB</span>
+                                        <button
+                                            type="button"
+                                            onClick={() => removeFile(index)}
+                                            className="text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
+                                        >
+                                            <FiX size={16} />
+                                        </button>
                                     </div>
                                 )}
                             </div>
